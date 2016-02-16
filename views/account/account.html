@@ -1,0 +1,97 @@
+<!-- *******************  Update alert on information save  ******************* -->
+<script>
+$(document).ready(function() {
+    $("#profile-message").hide();
+    $("#update").click(function showAlert() {
+        $("#profile-message").alert();
+        $("#profile-message").fadeTo(2000, 500).slideUp(500, function() {
+            $("#profile-message").alert('close');
+        });
+    });
+});
+</script>
+<div id="profile-message">
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Updates Saved!</strong>
+    </div>
+</div>
+<!-- ********************  Account Page Main Content  ******************* -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            <div>
+             <div><h2 id="profileAsk"></h2></div>
+  <br>
+                <div class="form-group" style="float:inline-block;">
+                    <label for="inputName" class="col-md-2 control-label">First Name:</label>
+                    <div class="input-group">
+                        <input type="text" id="inputName" class="form-control" ng-model="profile.displayName"  ng-change="profile.$save()" value="profile.displayName || ?">
+                    </div>
+                </div>
+            </div>
+            <div>
+     <div class="form-group">
+                    <label for="inputAge" class="col-md-2 control-label" name="age">Age:</label>
+                    <div class="input-group">
+                        <input type="number" id="inputEmail" class="form-control" ng-model="profile.age" maxlength="2" ng-change="profile.$save()">
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <label for="inputEmail" class="col-md-2 control-label" name="email">Email:</label>
+                    <div class="input-group">
+                        <input type="text" id="inputEmail" class="form-control" ng-model="profile.email" ng-change="profile.$save()">
+                    </div>
+                </div>
+            </div>
+            
+            <button id="update" class="btn btn-raised btn-primary accountButtons" type="submit"  ng-click="updateProfile()">Update Profile</button>
+
+        </div>
+    
+        <div class="col-sm-offset-3 col-sm-6">
+          <div class="form-group">
+                    <label for="inputLat" class="col-md-3 control-label">Current Location:</label>
+                    <div class="input-group">
+                  <input type="text" id="inputLat" class="form-control" ng-model="latLon" readonly>
+                    </div>
+                </div>
+                    <button id="update" class="btn btn-raised btn-primary accountButtons"  type="submit" ng-click="getLocation()">Update Location</button>
+                </div>
+
+    </div>
+
+</div>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-sm-offset-3 col-sm-6">
+    <h2 id="demo" style="color:#FA3838;"></h2>
+</div>
+</div>
+</div>
+<!-- <div class="container"> -->
+<!--     <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+       
+        <div>
+                <h4>Cabyn 1: {{cabynOne.name || "N/A"}}  </h4> <button class="btn btn-default btn-danger" ng-click="leaveCabynOne()" ng-show="profile.cabynOne">Leave This Cabyn</button>
+            </div>
+                <div>
+                <h4>Cabyn 2: {{cabynTwo.name || "N/A"}}  </h4> <button class="btn btn-default btn-danger" ng-click="leaveCabynOne()" ng-show="profile.cabynTwo">Leave This Cabyn</button>
+            </div>
+        </div>
+    </div> -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-offset-11 col-sm-1">
+        <br>
+        <br>
+            <a href "#" ng-click="logout()" class="btn btn-raised btn-default">Logout</a>
+            </div>
+    </div>
+         </div>
+
+    <script type="text/javascript">
+    $.material.init()
+    </script>

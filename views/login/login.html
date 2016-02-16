@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row login">
+        <div class="col-sm-4 col-md-offset-4">
+            <h1>Log In / Sign Up</h1>
+            <br>
+            <div ng-hide="emailSignup">
+                <a ng-click="twitterAuth()" class="btn btn-raised btn-lg btn-info socialButtons Twitter"><i class="fa fa-twitter fa-2x pull-left"></i><div id="socialButtons">Sign in With Twitter</div></a>
+                <br>
+                <a ng-click="facebookAuth()" class="btn btn-raised btn-lg btn-primary socialButtons Facebook"><i class="fa fa-facebook fa-2x pull-left"></i><div id="socialButtons">Sign in With Facebook</div></a>
+                <br>
+                <a ng-click="googleAuth()" class="btn btn-raised btn-lg btn-danger socialButtons Google"><i class="fa fa-google fa-2x pull-left"></i><div id="socialButtons">Sign in With Google</div></a>
+                <br>
+            </div>
+            <a ng-click="emailSignup = !emailSignup" class="btn btn-raised btn-lg btn-default socialButtons"><i class="fa fa-envelope-o fa-2x pull-left"></i><div id="socialButtons">Sign in With email</div></a>
+            <div ng-show="emailSignup">
+                <div class="wrapper">
+                    <br>
+                    <div class="form-group" ng-class="{ 'has-error' : regForm.email.$invalid }">
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="password">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" ng-click="createUser()" ng-disabled="!email || !password">Register
+                        </button>
+                        <button type="submit" class="btn btn-primary" ng-click="authWithPassword()" ng-disabled="!email || !password">Sign In
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <p ng-if="message"><strong>{{ message }}</strong></p>
+                <p ng-if="message2"><strong>{{ message2 }}</strong></p>
+                <p ng-if="message2"><strong>{{ error2 }}</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+  
+  <script type="text/javascript">
+    $.material.init()
+    </script>

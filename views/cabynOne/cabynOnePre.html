@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="cabynTitle col-sm-12">
+            <h3 class="text-center">You're not in a Cabyn.  You can  <!-- <button class="btn btn-raised btn-info" ng-click="j = !j"> -->join<!-- </button> --> one below or  <button ng-click="make = !make" class="btn btn-raised btn-info">Create</button> your own.</h3>
+<!--             <div class="row" ng-show="!make && !j">
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="well well-sm">
+                        <h3>Joining shows you cabyns in your area.  </h3>
+                        <h4>You should join a cabyn that looks interesting.</h4>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row" ng-show="!make">
+            <div class="col-md-offset-2 col-md-8">
+                <div class="form-group">
+                <label for="search" class="col-md-1 control-label">Search:</label>
+                     <div class="col-md-5">
+                    <input type="text" class="form-control" id="search" placeholder="Filter Caybns" ng-model="searchText">
+                         </div>
+                </div>
+                </div>
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="well well-sm" ng-repeat="ball in balls | filter:searchText">
+                        <h3 id="cabynTitles">{{ball.cabyn.name}}</h3>
+                        <h3 id="cabynMemNum">{{ball.members}}/8 </h3>
+                        <h4 id="cabynMemAge" class="text-center">Age:<br>{{ball.cabyn.ages / ball.members || "?"}} </h4>
+                        <div ng-show="info">
+                            <h4>{{ball.cabyn.description}}</h4>
+                        </div>
+                        <br>
+                        <button ng-click="info = !info">description</button>
+                        <button ng-show="ball.members <= 7" ng-click="join(ball.cabyn.$id)">Join</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" ng-show="make">
+    <div class="col-md-6 col-md-offset-3">
+        <!-- PAGE TITLE -->
+        <div class="page-header">
+            <h1 class="text-center"><span class="glyphicon glyphicon-home"></span> Create A New Cabyn</h1>
+        </div>
+        <!-- SHOW ERROR/SUCCESS MESSAGES -->
+        <div id="messages" class="well" ng-show="message">{{ message }}</div>
+        <!-- FORM -->
+        <form ng-submit="makeCabyn(cabyn)">
+            <!-- NAME -->
+            <div id="form-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+                <label class="cabynCreateLabels">Cabyn Name</label>
+                <input type="text" name="name" class="form-control" placeholder="The Pokémon Club" ng-model="cabyn.name" required>
+                <span class="help-block" ng-show="errorName">{{ errorName }}</span>
+            </div>
+            <!-- SUPERHERO NAME -->
+            <div class="form-group">
+                <label class="cabynCreateLabels">Cabyn Description</label>
+                <div>
+                    <textarea class="form-control" rows="3" id="textArea" placeholder="Say a little bit about what your Cabyn likes to do." ng-model="cabyn.description"></textarea>
+                </div>
+            </div>
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" class="btn btn-success btn-lg btn-block ">
+                <span class="glyphicon glyphicon-flash"></span> Create!
+            </button>
+        </form>
+        <p id="demo"></p>
+    </div>
+</div>

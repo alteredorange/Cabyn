@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <div class="cabynTitle col-sm-12 text-center">
+            <h1 id="cabynTitles">{{userCabyn.name}}</h1>
+        </div>
+        <div class="cabynChat col-sm-10">
+            <div class="example-chat l-demo-container">
+                <ul id='example-messages' class="example-chat-messages"></ul>
+                <footer>
+                    <input type='text' id='messageInput' placeholder='Type a message...'>
+                </footer>
+            </div>
+        </div>
+        <div class="cabynChat col-sm-2">
+            <p class="text-center chatMatch"> <b>Cabyn Members: </b></p>
+            <div>
+                <ul class="memberList">
+                    <li ng-repeat="member in members">
+                        <div class="circle" ng-show="member.s == 'on'" ng-cloak></div>
+                        <div class="circle2" ng-show="member.s == 'offline'" ng-cloak></div>
+                        <div class="circle3" ng-show="member.s == 'away'" ng-cloak></div> {{member.d}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-sm-offset-0 col-sm-8">
+            <div>
+                <h3 class="text-center"><b>Events</b></h3>
+                <div class="well well-sm eventsWells" ng-repeat="event in events">
+                    {{event.text}}
+                    <div class="panel"><a style="float:right; color:#348CD9; margin-top:3px;" href="" ng-click="deleteEvent(event.$id)">DELETE</a></div>
+                </div>
+            
+
+                <form style="margin-top:10px;" ng-submit="addEvent(event)">
+                    <div class="form-group label-floating">
+      <label class="control-label" for="focusedInput1">Add A New Event</label>
+  <div class="input-group">
+    <input class="form-control" id="focusedInput1" ng-model="event.text" type="text" >
+    <span class="input-group-btn">
+      <button type="submit" class="btn btn-standard btn-primary btn-raised" style=" background-color:#348CD9;">ADD
+      </button>
+    </span>
+  </div>
+</div>
+</form>
+
+            
+
+
+            </div>
+        </div>
+        <div class="cabynDetails col-sm-4">
+            <h3 class="text-center"><b>Cabyn Description </b></h3>
+            <div class="well well-sm eventsWells text-justify">
+                <div class="smallMargin">
+                    <textarea class="form-control" rows="3" id="textArea" ng-model="userCabyn.description" ng-change="userCabyn.$save()"></textarea>
+                    <span class="help-block">Edit description by typing above.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-offset-11 col-sm-1">
+        <br>
+        <br>
+            <a href "#" ng-click="leaveCabyn()" class="btn btn-raised btn-default">Leave This Cabyn</a>
+            </div>
+    </div>
+         </div>
+    <script type="text/javascript">
+    $.material.init()
+    </script>

@@ -1,0 +1,15 @@
+
+<!-- ********************  NG-Repeat of all Users in Firebase  ******************* -->
+<div class="text-center">
+    <h2><u>All Users</u></h2></div>
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 text-center">
+        <div class="well well-sm" ng-repeat="user in users">
+            <h3>{{user.name}}, {{user.color}}, {{user.email || "?"}}, {{user.provider || "?"}}</h3>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+$.material.init()
+</script>

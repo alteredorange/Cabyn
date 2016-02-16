@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+<!--    <base href="/">  -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cabyn</title>
+    <meta name="description" content="Meet New Friends">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- *********************  CSS Scripts ********************* -->
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Material Bootstrap  http://fezvrasta.github.io/bootstrap-material-design/#getting-started -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.material-design/0.5.7/css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.material-design/0.5.7/css/ripples.min.css">
+    <!-- FontAwesome For Icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="app.css">
+ 
+</head>
+
+<body>
+    <!-- *********************  Start Navbar  ********************* -->
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">CABYN</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-inverse-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/cabyn-1" ng-show="loggedIn">Cabyn 1</a></li>
+                    <li><a href="#/cabyn-2" ng-show="loggedIn">Cabyn 2</a></li>
+                    <li><a href="#/login" ng-hide="loggedIn" ng-cloak>Login</a></li>
+                    <li><a href="#/account" ng-show="loggedIn" ng-cloak>Account</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- *********************  End Navbar  ********************* -->
+    <!-- *********************  Angular View ********************* -->
+    <div ng-view ng-cloak></div>
+    <!-- *********************  End Angular View ********************* -->
+    <!-- *********************  JS Scripts ********************* -->
+    <!-- Latest jquery -->
+    <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <!-- Lastest Boostrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <!-- AngularRoute JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+
+<!-- RSVP -->
+<script src="assets/js/rsvp.min.js"></script>
+<!-- GeoFire -->
+<script src="https://cdn.firebase.com/libs/geofire/3.2.4/geofire.min.js"></script>
+<!-- Idle -->
+  <script src="assets/js/idle.min.js"></script>
+    <!-- Material Bootstrap  http://fezvrasta.github.io/bootstrap-material-design/#getting-started -->
+    <script src="https://cdn.jsdelivr.net/bootstrap.material-design/0.5.7/js/material.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap.material-design/0.5.7/js/ripples.min.js"></script>
+    <script type="text/javascript">
+    $.material.init()
+    </script>
+<!-- achorme js for turning text to links https://github.com/ali-saleem/anchorme.js -->
+    <script type="text/javascript" src="assets/js/anchorme.min.js"></script>
+    <!-- Stripe Checkout for checkout popups 
+    <script src="https://checkout.stripe.com/checkout.js"></script>-->
+    <!-- JS stripe for form submitting 
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script> -->
+    <!-- These two scripts simply used for number validation (comes from https://github.com/stripe/jquery.payment) 
+    <script src="assets/js/jquery.payment.min.js"></script>
+    <script>
+    jQuery(function($) {
+        $('[data-numeric]').payment('restrictNumeric');
+    });
+    </script> -->
+    <!-- Stripe Key 
+    <script type="text/javascript">
+    Stripe.setPublishableKey('pk_test_its3tpyzgduY0pREWf3dc1Lk');
+    </script> 
+
+    <!-- Local app sepcific scripts -->
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="users/users.service.js"></script>
+    <script src="views/login/login.js"></script>
+    <script src="views/account/account.js"></script>
+    <script src="views/cabynOne/cabynOne.js"></script>
+     <script src="views/cabynOne/cabynOnePre.js"></script>
+
+    <!-- *********************  End JS Scripts  ********************* -->
+</body>
+<!-- Cabyn Bottom -->
+<!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5498981280322586"
+     data-ad-slot="2788330900"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>  -->
+
+<!-- <footer class="footer" style="display:none">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10">
+                <h3 class="center-text">© Your Awesome Website 2016 <a href="javascript:void(0)"><i class="fa fa-twitter-square fa-1x"></i></a> <a href="javascript:void(0)"><i class="fa fa-facebook-square fa-1x"></i></a></h3>
+            </div>
+        </div>
+    </div>
+</footer> -->
+
+</html>
