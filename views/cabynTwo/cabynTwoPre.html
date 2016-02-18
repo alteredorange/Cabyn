@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="col-md-offset-2 col-md-8">
-                        <div class="well well-sm" ng-repeat="ball in balls | filter:searchText" ng-show="ball.cabyn.name">
+                        <div class="well well-sm" ng-repeat="ball in balls | filter:searchText" ng-show="ball.cabyn.name; profile.cabynOne !== ball.cabyn.$id">
                             <h3 id="cabynTitles">{{ball.cabyn.name}}</h3>
                             <h3 id="cabynMemNum">{{ball.members}}/8 </h3>
                             <h3 id="cabynMemAge" class="text-center">{{ball.age || "?"}} </h3>
@@ -77,4 +77,3 @@
         </div>
     </div>
 </div>
-

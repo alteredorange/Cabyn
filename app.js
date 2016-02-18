@@ -4,10 +4,13 @@
 angular.module('myApp', [
     'ngRoute',
     'myApp.config',
+    'myApp.home',
     'myApp.users',
     'myApp.login',
     'myApp.cabynOne',
     'myApp.cabynOnePre',
+    'myApp.cabynTwo',
+    'myApp.cabynTwoPre',
     'myApp.account'
 ])
 
@@ -22,15 +25,74 @@ angular.module('myApp', [
 
 .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.otherwise({
-        redirectTo: '/login'
+        redirectTo: '/home'
     });
-        // use the HTML5 History API
-      //  $locationProvider.html5Mode(true);
+       // use the HTML5 History API
+       $locationProvider.html5Mode(true);
 }])
 
 
+.directive('isActiveNav', [ '$location', function($location) {
+return {
+ restrict: 'A',
+ link: function(scope, element) {
+   scope.location = $location;
+   scope.$watch('location.path()', function(currentPath) {
+     if((currentPath === element[0].attributes['href'].nodeValue) || (currentPath === element[0].attributes['href'].nodeValue + '-pre')){
+
+       element.parent().addClass('active');
+     } else {
+
+       element.parent().removeClass('active');
+     }
+   });
+ }
+ };
+}])
+
+.directive('isHome', [ '$location', function($location) {
+return {
+ restrict: 'A',
+ link: function(scope, element) {
+   scope.location = $location;
+   scope.$watch('location.path()', function(currentPath) {
+     if (currentPath === '/home') {
+
+       element.addClass('bugaloooo');
+     } else {
+       element.removeClass('bugaloooo');
+     }
+   });
+ }
+ };
+ }])
+
+.directive('isAd', [ '$location', function($location) {
+return {
+ restrict: 'A',
+ link: function(scope, element) {
+   scope.location = $location;
+   scope.$watch('location.path()', function(currentPath) {
+     if ((currentPath === '/home') || (currentPath === '/login')) {
+
+       element.addClass('adTime');
+     } else {
+       element.removeClass('adTime');
+     }
+   });
+ }
+ };
+}])
+
+.controller('MainCtrl', ['$rootScope', '$scope', 'Auth', function($rootScope, $scope, Auth) {
+var billa = true;
+
+
+}])
 
 .run(['$rootScope', 'Auth', '$location', 'furl', '$firebaseObject', function($rootScope, Auth, $location, furl, $firebaseObject) {
+var billa = true;
+
 
     // track status of authentication
     Auth.$onAuth(function(user) {

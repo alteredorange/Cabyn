@@ -1,11 +1,14 @@
 /* app css stylesheet */
 /* **********************  Global Styles  ********************** */
+div.headerPadding { padding-top: 70px!important; }
+
 label.control-label, .form-group.label-placeholder label.control-label { 
-  color: #348CD9!important;
+  color: #00a2ff!important;
 }
 
 .navbar.navbar-inverse {
-    background-color: #348CD9;
+    /* background-color: #00a2ff;  */
+   background-color: #00a2ff;
 }
  html, body { height: 100%; margin: 0; padding: 0; }
  #map { height: 100%; }
@@ -18,12 +21,90 @@ label.control-label, .form-group.label-placeholder label.control-label {
     margin-top: 60px;
 
 }
+.navbar .navbar-nav .active a {
+  background-color: #29b6f6!important;
+}
 
+p.superSmall {
+  display: table-cell;
+  vertical-align: middle;
+  float: right;
+    font-style: italic;
+  font-size: 12px;
+  margin-left: 7px;
+
+}
+a.navbar-brand {
+  font-style: bold;
+  font-size: 25px;
+}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
-/* **********************  End Global Styles  ********************** */
+/* **********************  END Global Styles  ********************** */
+body.bugaloooo { 
+  background: url(assets/images/bg.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+div.bugaloooo{
+background-color: rgba(255, 255, 255, 0)!important;
+}
+div.adTime.ad {
+  display: none;
+}
+.bg-image {
+    position: relative;
+}
+/*.bg-image img {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    opacity: .8;
+ -webkit-filter: contrast(1.3) sepia(0.3) saturate(1.3) hue-rotate(-10deg) brightness(0.95);
+  filter: contrast(1.3) sepia(0.3) saturate(1.3) hue-rotate(-10deg) brightness(0.95);
+}*/
+.bg-image iframe {
+  position: absolute;
+    display: block;
+     margin: 0 auto;
+}
+.bg-image h1 {
+    position: absolute;
+    text-align: center;
+    margin-top: 10%;
+    left: 0;
+    right: 0;
+    color: #FFFFFF;
+    font-size: 50px;
+    text-shadow: 3px 3px #585151;
+}
+div.holder {
+  position: relative;
+  width: 80%;
+   height: 80%;
+
+}
+div.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+
+div.videoWrapper iframe {
+  margin-top: 10px;
+  position: absolute;
+   text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/* **********************  END Home Styles  ********************** */
 /* **********************  Login Styles  ********************** */
 .row.login {
     text-align: center;
@@ -53,7 +134,7 @@ label.control-label, .form-group.label-placeholder label.control-label {
 /* **********************  End Login Styles  ********************** */
 /* **********************  Profile Styles  ********************** */
 button.accountButtons {
-  float:right; background-color:#348CD9!important; width:175px; padding-left: 0px; padding-right: 0px;
+  float:right; background-color:#00a2ff!important; width:175px; padding-left: 0px; padding-right: 0px;
 }
 
 #profile-message {
@@ -71,7 +152,9 @@ button.accountButtons {
 label.cabynCreateLabels {
   color: black;
 }
-
+h4.cabynDescription {
+  margin-bottom: -18px;
+}
 /* **********************  END Cabyn-PRE Styles  ********************** */
 /* **********************  Cabyn Styles  ********************** */
 div.eventsWells {
@@ -82,7 +165,7 @@ div.smallMargin {
       margin-top: -32px;
 }
 li.me {
-      color: #348CD9; 
+      color: #00a2ff; 
 }
 hr.hrEvents {
     background: #383434;
@@ -218,7 +301,7 @@ div.circle3{
     list-style: none;
     margin: 0px;
     padding: 20px;
-    height: 500px;
+    height: 450px;
     overflow: auto; }
     .example-chat ul li {
       margin-bottom: 10px;

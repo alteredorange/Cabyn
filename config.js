@@ -4,5 +4,5 @@
 angular.module('myApp.config', [])
 
   // your Firebase data URL goes here, no trailing slash
-  .constant('furl', 'https://mwymi.firebaseio.com/Awesome')
+  .constant('furl', 'https://cabyn.firebaseio.com')
 

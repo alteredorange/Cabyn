@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('myApp.cabynOne', ['ngRoute'])
+angular.module('myApp.cabynTwo', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/cabyn-1', {
-        templateUrl: 'views/cabynOne/cabynOne.html',
-        controller: 'CabynOneCtrl',
+    $routeProvider.when('/cabyn-2', {
+        templateUrl: 'views/cabynTwo/cabynTwo.html',
+        controller: 'CabynTwoCtrl',
         resolve: {
             auth: ["Auth", function(Auth) {
                 return Auth.$requireAuth();
@@ -21,8 +21,7 @@ angular.module('myApp.cabynOne', ['ngRoute'])
 
 
 
-.controller('CabynOneCtrl', ['$rootScope', '$scope', 'Auth', 'furl', '$location', 'profile', 'auth', 'Users', '$firebaseObject', '$firebaseArray', '$compile', function($rootScope, $scope, Auth, furl, $location, profile, auth, Users, $firebaseObject, $firebaseArray, $compile) {
-
+.controller('CabynTwoCtrl', ['$rootScope', '$scope', 'Auth', 'furl', '$location', 'profile', 'auth', 'Users', '$firebaseObject', '$firebaseArray', '$compile', function($rootScope, $scope, Auth, furl, $location, profile, auth, Users, $firebaseObject, $firebaseArray, $compile) {
 
 //Google Analytics
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -36,8 +35,7 @@ angular.module('myApp.cabynOne', ['ngRoute'])
  ga('set', 'userId', auth.uid); // Set the user ID using signed-in user_id.
 
 
-
-    $scope.profile = profile;
+   $scope.profile = profile;
     var inCabyn;
     var geoRef = new Firebase(furl + "/geoFire/");
     var geoFire = new GeoFire(geoRef);
@@ -45,13 +43,13 @@ angular.module('myApp.cabynOne', ['ngRoute'])
     $scope.cabyns = $firebaseArray(ref);
 
     //see if user is in a cabyn
-    profile.cabynOne == null ? inCabyn = false : inCabyn = true;
+    profile.cabynTwo == null ? inCabyn = false : inCabyn = true;
   //  console.log("In Cabyn: " + inCabyn);
     $scope.inCabyn = inCabyn;
 
 
 //get the average age
-    var totalMemberRef = new Firebase(furl + "/cabyns/" + profile.cabynOne);
+    var totalMemberRef = new Firebase(furl + "/cabyns/" + profile.cabynTwo);
       totalMemberRef.on("value", function(querySnapshot) {
           var AllMembers = querySnapshot.child("/members").numChildren();
             var AllAges = querySnapshot.child("/ages").val();
@@ -61,31 +59,31 @@ angular.module('myApp.cabynOne', ['ngRoute'])
 
     //if In cabyn, reference user cabyn
     if (inCabyn == true) {
-        var k = profile.cabynOne;
+        var k = profile.cabynTwo;
         var ref = new Firebase(furl + "/cabyns/" + k);
         $scope.userCabyn = $firebaseObject(ref);
 
-        if (profile.aged1 !== true) {
-            var refer = new Firebase(furl + "/cabyns/" + profile.cabynOne + "/ages");
+        if (profile.aged2 !== true) {
+            var refer = new Firebase(furl + "/cabyns/" + profile.cabynTwo + "/ages");
             refer.transaction(function(current_value) {
                 return (current_value || 0) + profile.age;
             });
             var refer2 = new Firebase(furl + "/users/" + auth.uid);
             refer2.update({
-                "aged1": true
+                "aged2": true
             });
         };
 
 
     } else {
-        $location.path("/cabyn-1-pre");
+        $location.path("/cabyn-2-pre");
     };
 
 
 
 
 
-    var eventsRef = new Firebase(furl + "/cabyns/" + profile.cabynOne + "/events/");
+    var eventsRef = new Firebase(furl + "/cabyns/" + profile.cabynTwo + "/events/");
     var Events = $firebaseArray(eventsRef);
     $scope.events = Events;
 
@@ -99,7 +97,7 @@ angular.module('myApp.cabynOne', ['ngRoute'])
     };
 
    $scope.deleteEvent = function(value) {
-      var ref3 = new Firebase(furl + "/cabyns/" + profile.cabynOne + "/events/" + value);
+      var ref3 = new Firebase(furl + "/cabyns/" + profile.cabynTwo + "/events/" + value);
       ref3.remove();
       };
 
@@ -115,11 +113,11 @@ angular.module('myApp.cabynOne', ['ngRoute'])
 
 
 //for deleting empty cabyns
-var usersUniqRef2 = new Firebase(furl + "/cabyns/" + profile.cabynOne);
+var usersUniqRef2 = new Firebase(furl + "/cabyns/" + profile.cabynTwo);
 //for deleting geoFire ref of empty cabyns
-var geoUniqRef = new Firebase(furl + "/geoFire/" + profile.cabynOne);
+var geoUniqRef = new Firebase(furl + "/geoFire/" + profile.cabynTwo);
 //for deleting messages of empty cabyns
-var messagesUniqRef = new Firebase(furl + "/messages/" + profile.cabynOne);
+var messagesUniqRef = new Firebase(furl + "/messages/" + profile.cabynTwo);
 //for deleting undefined cabyns
 var undefinedRef = new Firebase(furl + "/cabyns/undefined")
 
@@ -129,30 +127,30 @@ var undefinedRef = new Firebase(furl + "/cabyns/undefined")
 
         removePresenceOperation(myUserRef.toString(), null);
 
-        var refer = new Firebase(furl + "/cabyns/" + profile.cabynOne + "/ages");
+        var refer = new Firebase(furl + "/cabyns/" + profile.cabynTwo + "/ages");
         refer.transaction(function(current_value) {
             return (current_value || 0) - profile.age;
         });
         var refer2 = new Firebase(furl + "/users/" + auth.uid);
         refer2.update({
-            "aged1": false
+            "aged2": false
         });
-        var ref = new Firebase(furl + "/users/" + auth.uid + "/cabynOne/");
+        var ref = new Firebase(furl + "/users/" + auth.uid + "/cabynTwo/");
         ref.remove();
-        var ref2 = new Firebase(furl + "/cabyns/" + profile.cabynOne + "/members/" + auth.uid);
+        var ref2 = new Firebase(furl + "/cabyns/" + profile.cabynTwo + "/members/" + auth.uid);
         ref2.remove();
 
         usersUniqRef2.on("value", function(querySnapshot) {
           if (!(querySnapshot.child("/members").numChildren() > 0)) {
-            usersUniqRef2.remove();
+             usersUniqRef2.remove();
             geoUniqRef.remove();
             messagesUniqRef.remove();
-            undefinedRef.remove();
+               undefinedRef.remove();
           };
         });
 
-        //window.location.replace("#/cabyn-1-pre");
-        $location.path("/cabyn-1-pre");
+        //window.location.replace("#/cabyn-2-pre");
+        $location.path("/cabyn-2-pre");
     };
 
 
@@ -160,8 +158,8 @@ var undefinedRef = new Firebase(furl + "/cabyns/undefined")
 
 
 
-    var usersRef1 = new Firebase(furl + "/cabyns/" + profile.cabynOne + "/members/" + auth.uid);
-    var usersRef = new Firebase(furl + "/cabyns/" + profile.cabynOne + "/members/");
+    var usersRef1 = new Firebase(furl + "/cabyns/" + profile.cabynTwo + "/members/" + auth.uid);
+    var usersRef = new Firebase(furl + "/cabyns/" + profile.cabynTwo + "/members/");
     var connectedRef = new Firebase("https://mwymi.firebaseio.com//.info/connected");
     //var connectedRef = new Firebase(furl + "/info/connected/" + auth.uid + "/online/");
 
@@ -176,7 +174,7 @@ var undefinedRef = new Firebase(furl + "/cabyns/undefined")
     var title = document.title;
 
     // CREATE A REFERENCE TO FIREBASE
-    var messagesRef = new Firebase(furl + "/messages/" + profile.cabynOne);
+    var messagesRef = new Firebase(furl + "/messages/" + profile.cabynTwo);
 
 
     // REGISTER DOM ELEMENTS

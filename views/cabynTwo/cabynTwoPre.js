@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('myApp.cabynOnePre', ['ngRoute'])
+angular.module('myApp.cabynTwoPre', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/cabyn-1-pre', {
-        templateUrl: 'views/cabynOne/cabynOnePre.html',
-        controller: 'CabynOPCtrl',
+    $routeProvider.when('/cabyn-2-pre', {
+        templateUrl: 'views/cabynTwo/cabynTwoPre.html',
+        controller: 'CabynTPCtrl',
         resolve: {
             auth: ["Auth", function(Auth) {
                 return Auth.$requireAuth();
@@ -21,8 +21,8 @@ angular.module('myApp.cabynOnePre', ['ngRoute'])
 
 
 
-.controller('CabynOPCtrl', ['$rootScope', '$scope', 'Auth', 'furl', '$location', 'profile', 'auth', 'Users', '$firebaseObject', '$firebaseArray', function($rootScope, $scope, Auth, furl, $location, profile, auth, Users, $firebaseObject, $firebaseArray) {
- 
+.controller('CabynTPCtrl', ['$rootScope', '$scope', 'Auth', 'furl', '$location', 'profile', 'auth', 'Users', '$firebaseObject', '$firebaseArray', function($rootScope, $scope, Auth, furl, $location, profile, auth, Users, $firebaseObject, $firebaseArray) {
+
     // $scope.profile = profile;
     // var inCabyn;
     // var geoRef = new Firebase(furl + "/geoFire/");
@@ -47,7 +47,6 @@ angular.module('myApp.cabynOnePre', ['ngRoute'])
  ga('set', 'userId', auth.uid); // Set the user ID using signed-in user_id.
 };
 
-
     $scope.profile = profile;
     var inCabyn;
     var geoRef = new Firebase(furl + "/geoFire/");
@@ -56,13 +55,13 @@ angular.module('myApp.cabynOnePre', ['ngRoute'])
     $scope.cabyns = $firebaseArray(ref);
 
     //see if user is in a cabyn
-    profile.cabynOne == null ? inCabyn = false : inCabyn = true;
-   // console.log("In Cabyn: " + inCabyn);
+    profile.cabynTwo == null ? inCabyn = false : inCabyn = true;
+ //   console.log("In Cabyn: " + inCabyn);
     $scope.inCabyn = inCabyn;
 
     //if In cabyn, reference user cabyn
     if (inCabyn == true) {
-        $location.path("/cabyn-1");
+        $location.path("/cabyn-2");
     };
     //if In cabyn, reference user cabyn
     // if (inCabyn == true) {
@@ -70,7 +69,7 @@ angular.module('myApp.cabynOnePre', ['ngRoute'])
     //     var ref = new Firebase(furl + "/cabyns/" + k);
     //     $scope.userCabyn = $firebaseObject(ref);
     // } else {
-    //     $location.path("/cabyn-1-pre");
+    //     $location.path("/cabyn-2-pre");
     // };
 
     var usersRef1 = new Firebase(furl + "/cabyns/");
@@ -94,21 +93,19 @@ angular.module('myApp.cabynOnePre', ['ngRoute'])
     var sum = 0;
 
 
- 
+
 
     geoQuery = geoFire.query({
         center: [profile.lat, profile.lon],
         radius: 24.1402
     });
 
-
     geoQuery.on("key_entered", function(key, location, distance) {
         console.log(key + " is located at [" + location + "] which is within the query (" + distance.toFixed(2) + " km from center)");
         var newRef = new Firebase(furl + "/cabyns/" + key);
         $scope.cabynArray = $firebaseObject(newRef);
 
-
-         newRef.once("value", function(snapshot) {
+        newRef.once("value", function(snapshot) {
             var members = snapshot.child("/members").numChildren();
             var AllAges = snapshot.child("/ages").val();
             var AverageAge = (AllAges / members);
@@ -121,30 +118,29 @@ angular.module('myApp.cabynOnePre', ['ngRoute'])
         });
     });
 
-
     geoQuery.on("key_exited", function(key, location, distance) {
         console.log(key, location, distance);
-      //  console.log(key + " is located at [" + location + "] which is no longer within the query (" + distance.toFixed(2) + " km from center)");
+        //  console.log(key + " is located at [" + location + "] which is no longer within the query (" + distance.toFixed(2) + " km from center)");
     });
 
 
-var tots = 0;
-for (var i = 0; i < total.length; i++) {
-    tots += total[i] << 0;
-}
+    var tots = 0;
+    for (var i = 0; i < total.length; i++) {
+        tots += total[i] << 0;
+    }
 
 
 
 
 
     $scope.join = function(value) {
-        //update user CabynOne value
+        //update user CabynTwo value
         var ref = new Firebase(furl + "/users/" + auth.uid);
         ref.update({
-            cabynOne: value
+            cabynTwo: value
         });
 
-        $location.path("/cabyn-1");
+        $location.path("/cabyn-2");
     };
 
     $scope.leaveCabyn = function() {
@@ -181,7 +177,7 @@ for (var i = 0; i < total.length; i++) {
 
             var ref = new Firebase(furl + "/users/" + auth.uid);
             ref.update({
-                cabynOne: cabID
+                cabynTwo: cabID
             });
             location.reload();
         };
